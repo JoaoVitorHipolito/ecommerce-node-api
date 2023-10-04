@@ -22,18 +22,18 @@ async function main(){
 
     //console.log(categoriaRecuperada)
 
-   // const categoria: Categoria = Categoria.criar({
-      //  nome: 'mesa'
-   // })
-  //  const categoriaInserida = await categoriaRepo.inserir(categoria);
+//     const categoria: Categoria = Categoria.criar({
+//        nome: 'mesa'
+//     })
+//    const categoriaInserida = await categoriaRepo.inserir(categoria);
 
     //console.log(categoriaInserida)
 
    // const categoria = await categoriaRepo.recuperarTodos();
    // console.log(categoria)
 
- const categoriaDeletada = await categoriaRepo.deletar("b35e732b-e87a-4731-8ae8-82ae15a92a4b")
- console.log(categoriaDeletada)
+ //const categoriaDeletada = await categoriaRepo.deletar("b35e732b-e87a-4731-8ae8-82ae15a92a4b")
+// console.log(categoriaDeletada)
 }
 
 main()

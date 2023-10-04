@@ -17,7 +17,7 @@ model Categoria {
   dataAltuakizacao DateTime @updatedAt @map("data_altualizacao")
   produtos  ProdutosCategorias[]
 
-  @@map("categoria")
+  @@map("categorias")
 }
 
 model ProdutosCategorias {
@@ -39,6 +39,7 @@ model Produto {
   valor   Int
   dataCriacao DateTime @default(now()) @map("data_criacao")
   dataAltuakizacao DateTime @updatedAt @map("data_altualizacao")
+  dataExclusao      DateTime? @map("data_exclusao")
   categorias ProdutosCategorias[]
 
   @@map("produtos")
