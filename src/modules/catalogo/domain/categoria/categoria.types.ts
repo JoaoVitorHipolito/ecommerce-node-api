@@ -1,13 +1,16 @@
+import { IDatasControle, KeyDatacontrole } from "@shared/datas.types";
 import { type } from "os";
 
-interface ICategoria{
+interface ICategoria extends IDatasControle{
     id?:string;
     nome:string;
      
 }
 
-type criarcategoriaProps = Omit<ICategoria, "id">;
+type criarcategoriaProps = Omit<ICategoria, "id" | KeyDatacontrole>;
 
-type RecuperarcategoriaProps = Required<ICategoria>;
+type RecuperarcategoriaProps = ICategoria & {
+    id: NonNullable<ICategoria['id']>
+}
 
 export{ICategoria,criarcategoriaProps, RecuperarcategoriaProps}

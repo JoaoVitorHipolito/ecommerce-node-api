@@ -6,7 +6,7 @@ import { ProdutoMap } from "@modules/catalogo/mappers/produto.map";
 import { PrismaRepository } from "@shared/infra/database/prisma.repository";
 import { produtoIncludeCategoriaPrisma } from "@shared/infra/database/prisma.types";
 
-class ProdutoPrismarepositroy extends PrismaRepository implements IProdutoRepository<Produto>{
+class ProdutoPrismarepository extends PrismaRepository implements IProdutoRepository<Produto>{
     
     async recuperarPorUuid(uuid: string): Promise<Produto | null> {
         const produtoRecuperado = await this._datasource.produto.findUnique({
@@ -89,4 +89,4 @@ class ProdutoPrismarepositroy extends PrismaRepository implements IProdutoReposi
 
 }
 
-export{ProdutoPrismarepositroy}
+export{ProdutoPrismarepository}
