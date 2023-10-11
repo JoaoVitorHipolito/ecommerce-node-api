@@ -8,6 +8,7 @@ import { produtoIncludeCategoriaPrisma } from "@shared/infra/database/prisma.typ
 
 class ProdutoPrismarepository extends PrismaRepository implements IProdutoRepository<Produto>{
     
+    
     async recuperarPorUuid(uuid: string): Promise<Produto | null> {
         const produtoRecuperado = await this._datasource.produto.findUnique({
             where: {
@@ -85,6 +86,51 @@ class ProdutoPrismarepository extends PrismaRepository implements IProdutoReposi
         );
         if (produtoDeletado.id) {return true;}
         return false;
+    }
+
+    async adicionarCategoria(produto: Produto, categoria: Categoria): Promise<boolean> {
+        const categoriaProdutoAdicionada = await this._datasource.produtosCategorias.create(
+            {
+                data:{
+                    produtoId: produto.id,
+                    categoriaId: categoria.id
+                }
+            }
+        );
+        if (categoriaProdutoAdicionada) {return true;}
+        return false;
+    }
+   async removerCategoria(produto: Produto, categoria: Categoria): Promise<boolean> {
+    const categoriaProdutoRemovida = await this._datasource.produtosCategorias.delete(
+        {
+           where: {
+               produtoId_categoriaId: {
+                    produtoId: produto.id,
+                    categoriaId:categoria.id
+               }
+           }
+            
+        }
+    );
+    if (categoriaProdutoRemovida) {return true;}
+    return false;
+    }
+    async alterarStatus(produto: Produto, status: StatusProdut): Promise<boolean> {
+        const produtoStatusAlterado = await this._datasource.produto.update(
+            {
+                where: {
+                    id: produto.id
+                },
+                data: {
+                   status: ProdutoMap.toStatusProdutoPrisma(status)
+                }      
+            }
+        );
+        if (produtoStatusAlterado.id) {return true;}
+        return false;
+    }
+   async recuperarPorCategoria(idCategoria: string): Promise<Produto[]> {
+        throw new Error("Method not implemented.");
     }
 
 }

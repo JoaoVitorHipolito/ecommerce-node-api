@@ -147,6 +147,27 @@ async function main(){
 	//const produtoDeletado: boolean = await produtoRepo.deletar("7d6a14d5-02f3-4b6d-8cb8-8601ff151f10");
 
 	//console.log(produtoDeletado);
+
+    
+    ////////////////////////////////////////////
+	//Adicionar e Remover Categoria ao Produto//
+	////////////////////////////////////////////
+    
+    //const produtoRecuperado: Produto | null = await produtoRepo.recuperarPorUuid("737f111b-eba1-457f-9552-5b5f28511d5d");
+
+    //const categoriaRecuperada: Categoria | null = await categoriaRepo.recuperarPorUuid("03f890b0-684a-44ba-a887-170e26bb2cd2");
+
+    //if (produtoRecuperado && categoriaRecuperada){
+
+        //if (produtoRecuperado.adicionarCategoria(categoriaRecuperada)) {
+        //    await produtoRepo.adicionarCategoria(produtoRecuperado,categoriaRecuperada);
+        //}
+
+       //if (produtoRecuperado.removerCategoria(categoriaRecuperada)) {
+        //    await produtoRepo.removerCategoria(produtoRecuperado,categoriaRecuperada);
+        //}
+
+    //}
 }
 
 main()
