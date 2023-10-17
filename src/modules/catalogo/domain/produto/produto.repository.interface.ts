@@ -1,6 +1,7 @@
 import { IRepository } from "@shared/domain/repository.interface";
 import { Produto } from "./produto.entity";
 import { Categoria } from "../categoria/categoria.entity";
+import { StatusProduto } from "./produto.types";
 
 interface IProdutoRepository<T> extends IRepository<T>{
 

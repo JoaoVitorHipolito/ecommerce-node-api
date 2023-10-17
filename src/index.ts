@@ -2,14 +2,10 @@ import { Categoria } from "@modules/catalogo/domain/categoria/categoria.entity";
 import { Produto } from "@modules/catalogo/domain/produto/produto.entity";
 import { CategoriaPrismaRepository } from "@modules/catalogo/infra/database/categoria.prisma.repository";
 import { ProdutoPrismarepository } from "@modules/catalogo/infra/database/produto.prisma.Repository";
-import { PrismaClient } from "@prisma/client";
 import { DomainException } from "@shared/domain/domain.exception";
-
-const prisma = new PrismaClient({
-    log: ['query', 'info'],
-    errorFormat: 'pretty'
-});
-
+import { prisma } from "@main/infra/database/orm/prisma/client";
+import { categoriaRepositorio as categoriaRepo} from "@shared/infra/database";
+import { produtoRepositorio as produtoRepo} from "@shared/infra/database";
 async function main(){
 
     prisma.$connect().then(
@@ -17,9 +13,6 @@ async function main(){
             console.log('Postgres Conectado')
         }
     );
-
-    const categoriaRepo = new CategoriaPrismaRepository(prisma);
-    const produtoRepo = new ProdutoPrismarepository(prisma);
 
    ////////////////////////////////
     //Recuperar Categoria por UUID//
@@ -33,9 +26,9 @@ async function main(){
     //Recuperar Todas as Categorias//
     /////////////////////////////////
     
-   // const todasCategorias: Array<Categoria> = await categoriaRepo.recuperarTodos();
+   //const todasCategorias: Array<Categoria> = await categoriaRepo.recuperarTodos();
 
-    //console.log(todasCategorias);
+   // console.log(todasCategorias);
 
     ////////////////////////////////
     //Verifica se Existe Categoria//
@@ -93,26 +86,26 @@ async function main(){
 	///////////////////
 	
     
-    const categoria01: Categoria = Categoria.recuperar({
-        id: "88d7cef0-f390-45c0-8611-1154ec62e089",
-        nome: "Cozinha Americana"
-    });     
+    // const categoria01: Categoria = Categoria.recuperar({
+    //     id: "88d7cef0-f390-45c0-8611-1154ec62e089",
+    //     nome: "Cozinha Americana"
+    // });     
 
-    const categoria02: Categoria = Categoria.recuperar({
-        id: "3fe02049-0f07-44ae-87d6-99ec0897cb09",
-        nome: 'Banho'
-    })
+    // const categoria02: Categoria = Categoria.recuperar({
+    //     id: "3fe02049-0f07-44ae-87d6-99ec0897cb09",
+    //     nome: 'Banho'
+    // })
 
-    const produto: Produto = Produto.criar({
-        nome:'Pano de mesa',
-        descricao:'Algodão fio 60',
-        valor:30,
-        categorias:[categoria01]
-    });
+    // const produto: Produto = Produto.criar({
+    //     nome:'Pano de mesa',
+    //     descricao:'Algodão fio 60',
+    //     valor:30,
+    //     categorias:[categoria01]
+    // });
 
-	const produtoInserido = await produtoRepo.inserir(produto);
+	// const produtoInserido = await produtoRepo.inserir(produto);
 
-	console.log(produtoInserido);
+	// console.log(produtoInserido);
     
 
     

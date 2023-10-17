@@ -20,103 +20,108 @@ beforeAll(async()=>{
     
 });
 
-describe('Entidade de Dominio da categoria (criar)', () =>{
+describe('Entidade de Dominio: Categoria', ()=> {
 
-    test(' Deve criar uma categoria valida', async () =>{
-        const categoriaValida: criarcategoriaProps ={
-            nome: nomecategoriaValida
+    describe('categoria (Criar)', () =>{
 
-        };
-       
-        expect(Categoria.criar(categoriaValida))
-        .to.be.instanceof(Categoria)
+        test(' Deve criar uma categoria valida', async () =>{
+            const categoriaValida: criarcategoriaProps ={
+                nome: nomecategoriaValida
+    
+            };
+           
+            expect(Categoria.criar(categoriaValida))
+            .to.be.instanceof(Categoria)
+    
+            
+            
+        })
+    
+        test('Não Deve criarcategoria invalida - Tamanho minimo', async() =>{
+            const categoriaInvalida:criarcategoriaProps ={
+                nome:nomeCategoriaTamanhoMinInvalido
+            }
+    
+            expect(() => Categoria.criar(categoriaInvalida))
+            .toThrowError(NomeCategoriaTamanhoMinimoInvalido)
+    
+        })
+    
+        test('Não Deve criarcategoria invalida - Tamanho maximo', async() =>{
+            const categoriaInvalida:criarcategoriaProps ={
+                nome:nomeCategoriaTamanhoMaxInvalido
+            }
+    
+            expect(() => Categoria.criar(categoriaInvalida))
+            .toThrowError(NomeCategoriaTamanhoMaximoInvalido)
+    
+        })
+    
+    
+    });
 
-        
-        
-    })
+    describe('Categoria (Recuperar)', () => {
 
-    test('Não Deve criarcategoria invalida - Tamanho minimo', async() =>{
-        const categoriaInvalida:criarcategoriaProps ={
-            nome:nomeCategoriaTamanhoMinInvalido
-        }
-
-        expect(() => Categoria.criar(categoriaInvalida))
-        .toThrowError(NomeCategoriaTamanhoMinimoInvalido)
-
-    })
-
-    test('Não Deve criarcategoria invalida - Tamanho maximo', async() =>{
-        const categoriaInvalida:criarcategoriaProps ={
-            nome:nomeCategoriaTamanhoMaxInvalido
-        }
-
-        expect(() => Categoria.criar(categoriaInvalida))
-        .toThrowError(NomeCategoriaTamanhoMaximoInvalido)
-
-    })
-
+        test('Deve Recuperar Uma Categoria Válida', async () => {
+    
+            //Dado (Given)
+            const categoriaValida: RecuperarcategoriaProps = {
+                id: UUIDValido,
+                nome: nomecategoriaValida
+            };
+    
+            //Quando (When) e Então (Then)
+            expect(Categoria.recuperar(categoriaValida))
+                .to.be.instanceof(Categoria);
+    
+        });
+    
+        test('Não Deve Recuperar Categoria Com ID Inválido (UUID Inválido)', async () => {
+    
+            //Dado (Given)
+            //Nome menor que três caracteres
+            const categoriaIdInvalido: RecuperarcategoriaProps = {
+                id: UUIDInvalido,
+                nome: nomecategoriaValida
+            };
+    
+            //Quando (When) e Então (Then)
+            expect(() => Categoria.recuperar(categoriaIdInvalido))
+                .toThrowError(IDEntityUUIDInvalid);
+    
+        });
+    
+        test('Não Deve Recuperar Categoria Com Nome Inválido (Tamanho Mínimo)', async () => {
+    
+            //Dado (Given)
+            //Nome menor que três caracteres
+            const categoriaNomeInvalido: RecuperarcategoriaProps = {
+                id: UUIDValido,
+                nome: nomeCategoriaTamanhoMinInvalido
+            };
+    
+            //Quando (When) e Então (Then)
+            expect(() => Categoria.recuperar(categoriaNomeInvalido))
+                .toThrowError(NomeCategoriaTamanhoMinimoInvalido);
+    
+        });
+    
+        test('Não Deve Recuperar Categoria Com Nome Inválido (Tamanho Máximo)', async () => {
+    
+            //Dado (Given)
+            //Nome maior que 50 caracteres
+            const categoriaNomeInvalido: RecuperarcategoriaProps = {
+                id: UUIDValido,
+                nome: nomeCategoriaTamanhoMaxInvalido
+            };
+    
+            //Quando (When) e Então (Then)
+            expect(() => Categoria.recuperar(categoriaNomeInvalido))
+                .toThrowError(NomeCategoriaTamanhoMaximoInvalido);
+    
+        });
+    
+    });
 
 });
 
-describe('Entidade de Domínio: Categoria (Recuperar)', () => {
-
-    test('Deve Recuperar Uma Categoria Válida', async () => {
-
-        //Dado (Given)
-        const categoriaValida: RecuperarcategoriaProps = {
-            id: UUIDValido,
-            nome: nomecategoriaValida
-        };
-
-        //Quando (When) e Então (Then)
-        expect(Categoria.recuperar(categoriaValida))
-            .to.be.instanceof(Categoria);
-
-    });
-
-    test('Não Deve Recuperar Categoria Com ID Inválido (UUID Inválido)', async () => {
-
-        //Dado (Given)
-        //Nome menor que três caracteres
-        const categoriaIdInvalido: RecuperarcategoriaProps = {
-            id: UUIDInvalido,
-            nome: nomecategoriaValida
-        };
-
-        //Quando (When) e Então (Then)
-        expect(() => Categoria.recuperar(categoriaIdInvalido))
-            .toThrowError(IDEntityUUIDInvalid);
-
-    });
-
-    test('Não Deve Recuperar Categoria Com Nome Inválido (Tamanho Mínimo)', async () => {
-
-        //Dado (Given)
-        //Nome menor que três caracteres
-        const categoriaNomeInvalido: RecuperarcategoriaProps = {
-            id: UUIDValido,
-            nome: nomeCategoriaTamanhoMinInvalido
-        };
-
-        //Quando (When) e Então (Then)
-        expect(() => Categoria.recuperar(categoriaNomeInvalido))
-            .toThrowError(NomeCategoriaTamanhoMinimoInvalido);
-
-    });
-
-    test('Não Deve Recuperar Categoria Com Nome Inválido (Tamanho Máximo)', async () => {
-
-        //Dado (Given)
-        //Nome maior que 50 caracteres
-        const categoriaNomeInvalido: RecuperarcategoriaProps = {
-            id: UUIDValido,
-            nome: nomeCategoriaTamanhoMaxInvalido
-        };
-
-        //Quando (When) e Então (Then)
-        expect(() => Categoria.recuperar(categoriaNomeInvalido))
-            .toThrowError(NomeCategoriaTamanhoMaximoInvalido);
-
-    });
-
-});

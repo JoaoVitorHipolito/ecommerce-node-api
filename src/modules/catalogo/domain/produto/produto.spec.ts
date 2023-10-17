@@ -55,288 +55,291 @@ beforeAll(async () => {
      UUIDValido = faker.string.uuid(); // Retorna um UUID v4
 });
 
+describe('Entidade de Domínio: Produto', () => {
 
-describe('Entidade de Domínio: Criar Produto', () => {
+    describe(' Criar Produto', () => {
     
-    //Teste define um conjunto de expectativas relacionadas. 
-    test('Deve Criar Um Produto Válido', async () => {
-
-        //Dado (Given)
-        const produtoValido: criarProdutoProps = {
-            nome: nomeProdutoValido,
-            descricao: descricaoProdutoValido,
-            valor: valorProdutoValido,
-            categorias: categoriasValidas
-        };
-
-        //Quando (When) e Então (Then)
-        expect(Produto.criar(produtoValido))
-            .to.be.instanceof(Produto);
-
-    });
-
-    //Teste define um conjunto de expectativas relacionadas. 
-    test('Não Deve Criar Produto Com Nome Inválido (Tamanho Mínimo)', async () => {
-
-        //Dado (Given)
-        //Nome menor que cinco caracteres
-        const produtoNomeInvalido: criarProdutoProps = {
-            nome: nomeProdutoTamanhoMinInvalido,
-            descricao: descricaoProdutoValido,
-            valor:valorProdutoValido,
-            categorias: categoriasValidas
-        };
-
-        //Quando (When) e Então (Then)
-        expect(() => Produto.criar(produtoNomeInvalido))
-            .toThrowError(ProdutoExceptions.NomeProdutoTamanhoMinimoInvalido);
-
-    });
-
-    //Teste define um conjunto de expectativas relacionadas. 
-    test('Não Deve Criar Produto Com Nome Inválido (Tamanho Máximo)', async () => {
-
-        //Dado (Given)
-        //Nome maior que cinquenta caracteres
-        const produtoNomeInvalido: criarProdutoProps = {
-            nome: nomeProdutoTamanhoMaxInvalido,
-            descricao: descricaoProdutoValido,
-            valor: valorProdutoValido,
-            categorias: categoriasValidas
-        };
-
-        //Quando (When) e Então (Then)
-        expect(() => Produto.criar(produtoNomeInvalido))
-            .toThrowError(ProdutoExceptions.NomeProdutoTamanhoMaximoInvalido);
-
-    });
+        //Teste define um conjunto de expectativas relacionadas. 
+        test('Deve Criar Um Produto Válido', async () => {
     
-    //Teste define um conjunto de expectativas relacionadas. 
-    test('Não Deve Criar Produto Com Descrição Inválida (Tamanho Mínimo)', async () => {
-
-        //Dado (Given)
-        //Descrição menor que dez caracteres
-        const produtoNomeInvalido: criarProdutoProps = {
-            nome: nomeProdutoValido,
-            descricao:descricaoProdutoTamanhoMinInvalido,
-            valor: valorProdutoValido,
-            categorias: categoriasValidas
-        };
-
-        //Quando (When) e Então (Then)
-        expect(() => Produto.criar(produtoNomeInvalido))
-            .toThrowError(ProdutoExceptions.DescricaoProdutoTamanhoMinimoInvalido);
-
-    });
+            //Dado (Given)
+            const produtoValido: criarProdutoProps = {
+                nome: nomeProdutoValido,
+                descricao: descricaoProdutoValido,
+                valor: valorProdutoValido,
+                categorias: categoriasValidas
+            };
     
-    //Teste define um conjunto de expectativas relacionadas. 
-    test('Não Deve Criar Produto Com Descrição Inválida (Tamanho Máximo)', async () => {
-
-
-        //Dado (Given)
-        //Descrição maior que duzentos caracteres
-        const produtoNomeInvalido: criarProdutoProps = {
-            nome: nomeProdutoValido,
-            descricao: descricaoProdutoTamanhoMaxInvalido,
-            valor: valorProdutoValido,
-            categorias: categoriasValidas
-        };
-
-        //Quando (When) e Então (Then)
-        expect(() => Produto.criar(produtoNomeInvalido))
-            .toThrowError(ProdutoExceptions.DescricaoProdutoTamanhoMaximoInvalido);
-
-    });
-
-    //Teste define um conjunto de expectativas relacionadas. 
-    test('Não Deve Criar Produto Com Valor Mínimo Inválido', async () => {
-
-
-        //Dado (Given)
-        //Valor mínimo menor que 0
-        const produtoNomeInvalido: criarProdutoProps = {
-            nome: nomeProdutoValido,
-            descricao: descricaoProdutoValido,
-            valor: valorMinProdutoInvalido,
-            categorias: categoriasValidas
-        };
-
-        //Quando (When) e Então (Then)
-        expect(() => Produto.criar(produtoNomeInvalido))
-            .toThrowError(ProdutoExceptions.ValorMinimoProdutoInvalido);
-
-    });
-
-    //Teste define um conjunto de expectativas relacionadas. 
-    test('Não Deve Criar Produto Com Número Mínimo de Categorias Inválido', async () => {
-
-       
-        //Dado (Given)
-        //Nenhuma categoria é atribuida - menor que 1
-        const produtoNomeInvalido: criarProdutoProps = {
-            nome: nomeProdutoValido,
-            descricao: descricaoProdutoValido,
-            valor: valorProdutoValido,
-            categorias: categoriasQtdMinInvalidas
-        };
-
-        //Quando (When) e Então (Then)
-        expect(() => Produto.criar(produtoNomeInvalido))
-            .toThrowError(ProdutoExceptions.QtdMinimaCategoriasProdutoInvalida);
-
-    });
-
-    //Teste define um conjunto de expectativas relacionadas. 
-    test('Não Deve Criar Produto Com Número Máximo de Categorias Inválido', async () => {
-
-       
-        //Dado (Given)
-        //4 categorias é atribuidas - maior que 3
-        const produtoNomeInvalido: criarProdutoProps = {
-            nome: nomeProdutoValido,
-            descricao: descricaoProdutoValido,
-            valor: valorProdutoValido,
-            categorias: categoriasQtdMaxInvalidas
-        };
-
-        //Quando (When) e Então (Then)
-        expect(() => Produto.criar(produtoNomeInvalido))
-            .toThrowError(ProdutoExceptions.QtdMaximaCategoriasProdutoInvalida);
-
-    });
+            //Quando (When) e Então (Then)
+            expect(Produto.criar(produtoValido))
+                .to.be.instanceof(Produto);
     
+        });
+    
+        //Teste define um conjunto de expectativas relacionadas. 
+        test('Não Deve Criar Produto Com Nome Inválido (Tamanho Mínimo)', async () => {
+    
+            //Dado (Given)
+            //Nome menor que cinco caracteres
+            const produtoNomeInvalido: criarProdutoProps = {
+                nome: nomeProdutoTamanhoMinInvalido,
+                descricao: descricaoProdutoValido,
+                valor:valorProdutoValido,
+                categorias: categoriasValidas
+            };
+    
+            //Quando (When) e Então (Then)
+            expect(() => Produto.criar(produtoNomeInvalido))
+                .toThrowError(ProdutoExceptions.NomeProdutoTamanhoMinimoInvalido);
+    
+        });
+    
+        //Teste define um conjunto de expectativas relacionadas. 
+        test('Não Deve Criar Produto Com Nome Inválido (Tamanho Máximo)', async () => {
+    
+            //Dado (Given)
+            //Nome maior que cinquenta caracteres
+            const produtoNomeInvalido: criarProdutoProps = {
+                nome: nomeProdutoTamanhoMaxInvalido,
+                descricao: descricaoProdutoValido,
+                valor: valorProdutoValido,
+                categorias: categoriasValidas
+            };
+    
+            //Quando (When) e Então (Then)
+            expect(() => Produto.criar(produtoNomeInvalido))
+                .toThrowError(ProdutoExceptions.NomeProdutoTamanhoMaximoInvalido);
+    
+        });
+        
+        //Teste define um conjunto de expectativas relacionadas. 
+        test('Não Deve Criar Produto Com Descrição Inválida (Tamanho Mínimo)', async () => {
+    
+            //Dado (Given)
+            //Descrição menor que dez caracteres
+            const produtoNomeInvalido: criarProdutoProps = {
+                nome: nomeProdutoValido,
+                descricao:descricaoProdutoTamanhoMinInvalido,
+                valor: valorProdutoValido,
+                categorias: categoriasValidas
+            };
+    
+            //Quando (When) e Então (Then)
+            expect(() => Produto.criar(produtoNomeInvalido))
+                .toThrowError(ProdutoExceptions.DescricaoProdutoTamanhoMinimoInvalido);
+    
+        });
+        
+        //Teste define um conjunto de expectativas relacionadas. 
+        test('Não Deve Criar Produto Com Descrição Inválida (Tamanho Máximo)', async () => {
+    
+    
+            //Dado (Given)
+            //Descrição maior que duzentos caracteres
+            const produtoNomeInvalido: criarProdutoProps = {
+                nome: nomeProdutoValido,
+                descricao: descricaoProdutoTamanhoMaxInvalido,
+                valor: valorProdutoValido,
+                categorias: categoriasValidas
+            };
+    
+            //Quando (When) e Então (Then)
+            expect(() => Produto.criar(produtoNomeInvalido))
+                .toThrowError(ProdutoExceptions.DescricaoProdutoTamanhoMaximoInvalido);
+    
+        });
+    
+        //Teste define um conjunto de expectativas relacionadas. 
+        test('Não Deve Criar Produto Com Valor Mínimo Inválido', async () => {
+    
+    
+            //Dado (Given)
+            //Valor mínimo menor que 0
+            const produtoNomeInvalido: criarProdutoProps = {
+                nome: nomeProdutoValido,
+                descricao: descricaoProdutoValido,
+                valor: valorMinProdutoInvalido,
+                categorias: categoriasValidas
+            };
+    
+            //Quando (When) e Então (Then)
+            expect(() => Produto.criar(produtoNomeInvalido))
+                .toThrowError(ProdutoExceptions.ValorMinimoProdutoInvalido);
+    
+        });
+    
+        //Teste define um conjunto de expectativas relacionadas. 
+        test('Não Deve Criar Produto Com Número Mínimo de Categorias Inválido', async () => {
+    
+           
+            //Dado (Given)
+            //Nenhuma categoria é atribuida - menor que 1
+            const produtoNomeInvalido: criarProdutoProps = {
+                nome: nomeProdutoValido,
+                descricao: descricaoProdutoValido,
+                valor: valorProdutoValido,
+                categorias: categoriasQtdMinInvalidas
+            };
+    
+            //Quando (When) e Então (Then)
+            expect(() => Produto.criar(produtoNomeInvalido))
+                .toThrowError(ProdutoExceptions.QtdMinimaCategoriasProdutoInvalida);
+    
+        });
+    
+        //Teste define um conjunto de expectativas relacionadas. 
+        test('Não Deve Criar Produto Com Número Máximo de Categorias Inválido', async () => {
+    
+           
+            //Dado (Given)
+            //4 categorias é atribuidas - maior que 3
+            const produtoNomeInvalido: criarProdutoProps = {
+                nome: nomeProdutoValido,
+                descricao: descricaoProdutoValido,
+                valor: valorProdutoValido,
+                categorias: categoriasQtdMaxInvalidas
+            };
+    
+            //Quando (When) e Então (Then)
+            expect(() => Produto.criar(produtoNomeInvalido))
+                .toThrowError(ProdutoExceptions.QtdMaximaCategoriasProdutoInvalida);
+    
+        });
+        
+    });
+
+    describe('Adicionar categoria ao Produto', () => {
+
+        test('Deve Adicionar Uma Categoria Válida a Um Produto Válido Apto a Ter Uma Nova Categoria', async () => {
+    
+            //Dado (Given)
+            const produtoValidoAptoNovaCategoria: Produto = Produto.recuperar({
+                id: UUIDValido,
+                nome: nomeProdutoValido,
+                descricao: descricaoProdutoValido,
+                valor: valorProdutoValido,
+                categorias: categoriasQtdValidaAptaAdicao
+            });
+    
+            //Categoria válida que não seja uma das categorias já adicionadas
+            const categoriaValida = Categoria.criar({nome:faker.string.alpha({length:{min:3,max:50}})});
+    
+            //Quando (When) e Então (Then)
+            expect(produtoValidoAptoNovaCategoria.adicionarCategoria(categoriaValida))
+                .toBe(categoriaValida);
+    
+            expect(produtoValidoAptoNovaCategoria.categorias)
+                .toContain(categoriaValida);
+    
+        });
+    
+        test('Não Deve Adicionar Uma Categoria Válida a Um Produto Válido Inapto a Ter Uma Nova Categoria - Quantidade Máxima de Categorias', async () => {
+    
+            //Dado (Given)
+            const produtoValidoInaptoNovaCategoria: Produto = Produto.recuperar({
+                id: UUIDValido,
+                nome: nomeProdutoValido,
+                descricao: descricaoProdutoValido,
+                valor: valorProdutoValido,
+                categorias: categoriasQtdMaxValidaInaptaAdicao
+            });
+    
+            //Categoria válida que não seja uma das categorias já adicionadas
+            const categoriaValida = Categoria.criar({nome:faker.string.alpha({length:{min:3,max:50}})});
+    
+            //Quando (When) e Então (Then)
+            expect(() => produtoValidoInaptoNovaCategoria.adicionarCategoria(categoriaValida))
+                .toThrowError(ProdutoExceptions.ProdutoJaPossuiQtdMaximaCategorias);
+            
+        });
+    
+        test('Não Deve Adicionar Uma Categoria Válida a Um Produto Válido Inapto a Ter Uma Nova Categoria - Categoria Já Adicionada', async () => {
+    
+            //Dado (Given)
+            const produtoValidoInaptoNovaCategoria: Produto = Produto.recuperar({
+                id: UUIDValido,
+                nome: nomeProdutoValido,
+                descricao: descricaoProdutoValido,
+                valor: valorProdutoValido,
+                categorias: categoriasQtdValidaInaptaAdicaoDuplicacao
+            });
+    
+            //Categoria válida já adicionada - recupera do array passado no produto anteriormete - garente que é um elemento que já existe
+            const categoriaValida = categoriasQtdValidaInaptaAdicaoDuplicacao[0];
+    
+            //Quando (When) e Então (Then)
+            expect(() => produtoValidoInaptoNovaCategoria.adicionarCategoria(categoriaValida))
+                .toThrowError(ProdutoExceptions.ProdutoJaPossuiCategoriaInformada);
+            
+        });
+    
+    });
+
+    describe('Remover Categoria do Produto', () => {
+
+        test('Deve Remover Uma Categoria Válida de Um Produto Válido Apto a Ter Uma Categoria Removida', async () => {
+    
+            //Dado (Given)
+            const produtoValidoAptoRemoverCategoria: Produto = Produto.recuperar({
+                id: UUIDValido,
+                nome: nomeProdutoValido,
+                descricao: descricaoProdutoValido,
+                valor: valorProdutoValido,
+                categorias: categoriasQtdValidaAptaRemocao
+            });
+    
+            //Categoria válida que já esteja adicionada 
+            const categoriaValida = categoriasQtdValidaAptaRemocao[0];
+    
+            //Quando (When) e Então (Then)
+            expect(produtoValidoAptoRemoverCategoria.removerCategoria(categoriaValida))
+                .toBe(categoriaValida);
+            
+            expect(produtoValidoAptoRemoverCategoria.categorias)  
+                .not.toContain(categoriaValida);
+            
+        });
+        
+        test('Não Deve Remover Uma Categoria Válida de Um Produto Válido Inapto a Ter Uma Categoria Removida - Quantidade Mínima de Categorias', async () => {
+    
+            //Dado (Given)
+            const produtoValidoInaptoRemoverCategoria: Produto = Produto.recuperar({
+                id: UUIDValido,
+                nome: nomeProdutoValido,
+                descricao: descricaoProdutoValido,
+                valor: valorProdutoValido,
+                categorias: categoriasQtdMinValidaInaptaRemocao
+            });
+    
+            //Categoria válida que já esteja adicionada 
+            const categoriaValida = categoriasQtdMinValidaInaptaRemocao[0];
+    
+            //Quando (When) e Então (Then)
+            expect(() => produtoValidoInaptoRemoverCategoria.removerCategoria(categoriaValida))
+                .toThrowError(ProdutoExceptions.ProdutoJaPossuiQtdMinimaCategorias);
+            
+        });
+    
+        test('Não Deve Remover Uma Categoria Válida de Um Produto Válido Inapto a Ter Uma Categoria Removida - Categoria Não Associada ao Produto', async () => {
+    
+            //Dado (Given)
+            const produtoValidoInaptoRemoverCategoria: Produto = Produto.recuperar({
+                id: UUIDValido,
+                nome: nomeProdutoValido,
+                descricao: descricaoProdutoValido,
+                valor: valorProdutoValido,
+                categorias: categoriasQtdValidaInaptaRemocaoNaoAssociada
+            });
+    
+            //Categoria válida que não seja uma das categorias já adicionadas
+            const categoriaValida = Categoria.criar({nome:faker.string.alpha({length:{min:3,max:50}})});
+    
+            //Quando (When) e Então (Then)
+            expect(() => produtoValidoInaptoRemoverCategoria.removerCategoria(categoriaValida))
+                .toThrowError(ProdutoExceptions.ProdutoNaoPossuiCategoriaInformada);
+            
+        });
+    
+    });
 });
 
-describe('Entidade de Domínio:Adicionar categoria ao Produto', () => {
-
-    test('Deve Adicionar Uma Categoria Válida a Um Produto Válido Apto a Ter Uma Nova Categoria', async () => {
-
-        //Dado (Given)
-        const produtoValidoAptoNovaCategoria: Produto = Produto.recuperar({
-            id: UUIDValido,
-            nome: nomeProdutoValido,
-            descricao: descricaoProdutoValido,
-            valor: valorProdutoValido,
-            categorias: categoriasQtdValidaAptaAdicao
-        });
-
-        //Categoria válida que não seja uma das categorias já adicionadas
-        const categoriaValida = Categoria.criar({nome:faker.string.alpha({length:{min:3,max:50}})});
-
-        //Quando (When) e Então (Then)
-		expect(produtoValidoAptoNovaCategoria.adicionarCategoria(categoriaValida))
-            .toBe(categoriaValida);
-
-        expect(produtoValidoAptoNovaCategoria.categorias)
-            .toContain(categoriaValida);
-
-    });
-
-    test('Não Deve Adicionar Uma Categoria Válida a Um Produto Válido Inapto a Ter Uma Nova Categoria - Quantidade Máxima de Categorias', async () => {
-
-        //Dado (Given)
-        const produtoValidoInaptoNovaCategoria: Produto = Produto.recuperar({
-            id: UUIDValido,
-            nome: nomeProdutoValido,
-            descricao: descricaoProdutoValido,
-            valor: valorProdutoValido,
-            categorias: categoriasQtdMaxValidaInaptaAdicao
-        });
-
-        //Categoria válida que não seja uma das categorias já adicionadas
-        const categoriaValida = Categoria.criar({nome:faker.string.alpha({length:{min:3,max:50}})});
-
-        //Quando (When) e Então (Then)
-        expect(() => produtoValidoInaptoNovaCategoria.adicionarCategoria(categoriaValida))
-            .toThrowError(ProdutoExceptions.ProdutoJaPossuiQtdMaximaCategorias);
-        
-    });
-
-    test('Não Deve Adicionar Uma Categoria Válida a Um Produto Válido Inapto a Ter Uma Nova Categoria - Categoria Já Adicionada', async () => {
-
-        //Dado (Given)
-        const produtoValidoInaptoNovaCategoria: Produto = Produto.recuperar({
-            id: UUIDValido,
-            nome: nomeProdutoValido,
-            descricao: descricaoProdutoValido,
-            valor: valorProdutoValido,
-            categorias: categoriasQtdValidaInaptaAdicaoDuplicacao
-        });
-
-        //Categoria válida já adicionada - recupera do array passado no produto anteriormete - garente que é um elemento que já existe
-        const categoriaValida = categoriasQtdValidaInaptaAdicaoDuplicacao[0];
-
-        //Quando (When) e Então (Then)
-        expect(() => produtoValidoInaptoNovaCategoria.adicionarCategoria(categoriaValida))
-            .toThrowError(ProdutoExceptions.ProdutoJaPossuiCategoriaInformada);
-        
-    });
-
-});
-
-describe('Entidade de Domínio: Remover Categoria do Produto', () => {
-
-    test('Deve Remover Uma Categoria Válida de Um Produto Válido Apto a Ter Uma Categoria Removida', async () => {
-
-        //Dado (Given)
-        const produtoValidoAptoRemoverCategoria: Produto = Produto.recuperar({
-            id: UUIDValido,
-            nome: nomeProdutoValido,
-            descricao: descricaoProdutoValido,
-            valor: valorProdutoValido,
-            categorias: categoriasQtdValidaAptaRemocao
-        });
-
-        //Categoria válida que já esteja adicionada 
-        const categoriaValida = categoriasQtdValidaAptaRemocao[0];
-
-        //Quando (When) e Então (Then)
-        expect(produtoValidoAptoRemoverCategoria.removerCategoria(categoriaValida))
-            .toBe(categoriaValida);
-        
-        expect(produtoValidoAptoRemoverCategoria.categorias)  
-            .not.toContain(categoriaValida);
-        
-    });
-    
-    test('Não Deve Remover Uma Categoria Válida de Um Produto Válido Inapto a Ter Uma Categoria Removida - Quantidade Mínima de Categorias', async () => {
-
-        //Dado (Given)
-        const produtoValidoInaptoRemoverCategoria: Produto = Produto.recuperar({
-            id: UUIDValido,
-            nome: nomeProdutoValido,
-            descricao: descricaoProdutoValido,
-            valor: valorProdutoValido,
-            categorias: categoriasQtdMinValidaInaptaRemocao
-        });
-
-        //Categoria válida que já esteja adicionada 
-        const categoriaValida = categoriasQtdMinValidaInaptaRemocao[0];
-
-        //Quando (When) e Então (Then)
-        expect(() => produtoValidoInaptoRemoverCategoria.removerCategoria(categoriaValida))
-            .toThrowError(ProdutoExceptions.ProdutoJaPossuiQtdMinimaCategorias);
-        
-    });
-
-    test('Não Deve Remover Uma Categoria Válida de Um Produto Válido Inapto a Ter Uma Categoria Removida - Categoria Não Associada ao Produto', async () => {
-
-        //Dado (Given)
-        const produtoValidoInaptoRemoverCategoria: Produto = Produto.recuperar({
-            id: UUIDValido,
-            nome: nomeProdutoValido,
-            descricao: descricaoProdutoValido,
-            valor: valorProdutoValido,
-            categorias: categoriasQtdValidaInaptaRemocaoNaoAssociada
-        });
-
-        //Categoria válida que não seja uma das categorias já adicionadas
-        const categoriaValida = Categoria.criar({nome:faker.string.alpha({length:{min:3,max:50}})});
-
-        //Quando (When) e Então (Then)
-        expect(() => produtoValidoInaptoRemoverCategoria.removerCategoria(categoriaValida))
-            .toThrowError(ProdutoExceptions.ProdutoNaoPossuiCategoriaInformada);
-        
-    });
-
-});

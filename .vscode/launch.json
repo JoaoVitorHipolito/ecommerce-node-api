@@ -16,6 +16,13 @@
             "outFiles": [
                 "${workspaceFolder}/**/*.js"
                 
+            ],
+            "runtimeArgs": [
+                "-r",
+                "tsconfig-paths/register",
+                "-r",
+                "sucrase/register",
+                "src"
             ]
         }
     ]

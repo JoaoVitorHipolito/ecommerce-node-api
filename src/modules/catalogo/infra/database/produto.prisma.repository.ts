@@ -1,6 +1,7 @@
 import { Categoria } from "@modules/catalogo/domain/categoria/categoria.entity";
 import { Produto } from "@modules/catalogo/domain/produto/produto.entity";
 import { IProdutoRepository } from "@modules/catalogo/domain/produto/produto.repository.interface";
+import { StatusProduto } from "@modules/catalogo/domain/produto/produto.types";
 import { CategoriaMap } from "@modules/catalogo/mappers/categoria.map";
 import { ProdutoMap } from "@modules/catalogo/mappers/produto.map";
 import { PrismaRepository } from "@shared/infra/database/prisma.repository";
@@ -26,7 +27,8 @@ class ProdutoPrismarepository extends PrismaRepository implements IProdutoReposi
        
         const produtosRecuperados = await this._datasource.produto.findMany({
             where:{
-                dataExclusao:null
+                dataExclusao:null,
+                status: StatusProduto.ATIVO
             },
             include: produtoIncludeCategoriaPrisma
         });
@@ -115,7 +117,7 @@ class ProdutoPrismarepository extends PrismaRepository implements IProdutoReposi
     if (categoriaProdutoRemovida) {return true;}
     return false;
     }
-    async alterarStatus(produto: Produto, status: StatusProdut): Promise<boolean> {
+    async alterarStatus(produto: Produto, status: StatusProduto): Promise<boolean> {
         const produtoStatusAlterado = await this._datasource.produto.update(
             {
                 where: {
@@ -129,8 +131,31 @@ class ProdutoPrismarepository extends PrismaRepository implements IProdutoReposi
         if (produtoStatusAlterado.id) {return true;}
         return false;
     }
-   async recuperarPorCategoria(idCategoria: string): Promise<Produto[]> {
-        throw new Error("Method not implemented.");
+    async recuperarPorCategoria(idCategoria: string): Promise<Produto[]> {
+        const produtosPorCategoriaRecuperados = await this._datasource.produto.findMany({
+            where: {
+                dataExclusao: null,
+                status: StatusProduto.ATIVO,
+                AND: [
+                    {
+                        categorias: {
+                            some: {
+                                categoriaId: idCategoria
+                            }
+                        }
+                    }
+                ]
+            },
+            include: produtoIncludeCategoriaPrisma
+        });
+        const produtos: Array<Produto> = [];
+
+        if (produtosPorCategoriaRecuperados.length > 0) {
+            produtosPorCategoriaRecuperados.map((produto) => {
+                produtos.push(ProdutoMap.fromPrismaModelToDomain(produto));
+            });
+        }
+        return produtos;
     }
 
 }
