@@ -1,7 +1,7 @@
 import { Categoria } from "@modules/catalogo/domain/categoria/categoria.entity";
 import { Produto } from "@modules/catalogo/domain/produto/produto.entity";
 import { CategoriaPrismaRepository } from "@modules/catalogo/infra/database/categoria.prisma.repository";
-import { ProdutoPrismarepository } from "@modules/catalogo/infra/database/produto.prisma.Repository";
+import { ProdutoPrismarepository } from "@modules/catalogo/infra/database/produto.prisma.repository";
 import { DomainException } from "@shared/domain/domain.exception";
 import { prisma } from "@main/infra/database/orm/prisma/client";
 import { categoriaRepositorio as categoriaRepo} from "@shared/infra/database";
@@ -75,7 +75,7 @@ async function main(){
 	//Recuperar Produto por UUID//
 	////////////////////////////////
 		
-	//const produtoRecuperado: Produto | null = await produtoRepo.recuperarPorUuid("7f35c7f4-ce26-4503-bfce-0afd937adfb8");
+	const produtoRecuperado: Produto | null = await produtoRepo.recuperarPorUuid("c57c4a68-1766-4098-939f-f5b8c0d8eb28");
 
 	//console.log(produtoRecuperado);
 

@@ -17,7 +17,8 @@ class ProdutoPrismarepository extends PrismaRepository implements IProdutoReposi
             },
             include: produtoIncludeCategoriaPrisma
         });
-
+        console.log('Aqui ---');
+        console.log(produtoRecuperado);
         if (produtoRecuperado){
            return ProdutoMap.fromPrismaModelToDomain(produtoRecuperado);
         }
@@ -160,4 +161,4 @@ class ProdutoPrismarepository extends PrismaRepository implements IProdutoReposi
 
 }
 
-export{ProdutoPrismarepository}
+export { ProdutoPrismarepository };
