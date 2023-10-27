@@ -7,6 +7,8 @@ import { afterEach } from "node:test";
 import { beforeAll, describe, expect, test, vi } from "vitest";
 import { DeepMockProxy, mockDeep, mockReset } from "vitest-mock-extended";
 import { ProdutoPrismarepository } from "./produto.prisma.repository";
+import { StatusProduto } from "@modules/catalogo/domain/produto/produto.types";
+import { produtoIncludeCategoriaPrisma } from "@shared/infra/database/prisma.types";
 
 
 
@@ -21,7 +23,7 @@ let categoriasValidas:Array<Categoria>;;
 let dataCriacaoproduto: Date;
 let dataAtualizacaoproduto: Date;
 let dataExclusao: Date;
-//let status: StatusProdutoPrisma
+let status: StatusProdutoPrisma
 
 describe('Repositorio Prisma: Produto', () => {
 
@@ -50,7 +52,7 @@ describe('Repositorio Prisma: Produto', () => {
         mockReset(prismaMock);
     });
 
-    describe('Recuperar Produto por ID', () =>{
+   describe('Recuperar Produto por ID', () =>{
 
         test('Deve Recuperar um produto por UUID', async () => {
             const produtoPrisma ={
@@ -58,29 +60,41 @@ describe('Repositorio Prisma: Produto', () => {
                 nome: 'Pano de mesa',
                 descricao: 'Algodão fio 60',
                 valor: 30,
-                dataCriacao: 2023-10-10T00:32:58.192Z,
-                dataAtualizacao: 2023-10-10T00:32:58.192Z,
-                dataExclusao: null,
-                status: 'ATIVO',
+                dataCriacao: faker.date.anytime(),
+                dataAtualizacao: faker.date.anytime(),
+                dataExclusao:faker.date.anytime(),
+                status: StatusProduto.ATIVO,
                 categorias: [
                   {
-                    produtoId: 'c57c4a68-1766-4098-939f-f5b8c0d8eb28',
-                    categoriaId: '88d7cef0-f390-45c0-8611-1154ec62e089',
-                    dataCriacao: 2023-10-10T00:32:58.192Z,
-                    dataAtualizacao: 2023-10-10T00:32:58.192Z,
+                    produtoId: 'e5eeda5d-cf95-4ac4-a7fe-128897d31f12',
+                    categoriaId: '159eaca9-f7be-4668-8344-17ecc8263f3e',
+                    dataCriacao: faker.date.anytime(),
+                    dataAtualizacao: faker.date.anytime(),
                     categoria: {
-                        id: UUIDValido,
-                        nome: nomeCategoriaValido,
-                        dataCriacao: dataCriacaoCategoria,
-                        dataAtualizacao: dataAtualizacaoCategoria
+                        id: '159eaca7-f7be-4668-8344-17ecc8263f3e',
+                        nome: 'Mesa',
+                        dataCriacao: faker.date.anytime(),
+                        dataAtualizacao: faker.date.anytime()
                     }
+                },
+                    {
+                        produtoId: 'e5eeda5d-cf95-4ac4-a7fe-128897d31f12',
+                        categoriaId: '21c6d449-2902-4d39-9d76-365180e6def9',
+                        dataCriacao: faker.date.anytime(),
+                        dataAtualizacao: faker.date.anytime(),
+                        categoria: {
+                            id: '189eaca9-f7be-4668-8344-17ecc8263f3e',
+                            nome: 'nomeCategoria',
+                            dataCriacao: faker.date.anytime(),
+                            dataAtualizacao: faker.date.anytime(),
+                        }
                   }
                 ]
               };
 
             prismaMock.produto.findUnique.mockResolvedValue(produtoPrisma);
 
-            const produto: Produto = ProdutoMap.toDomain(produtoPrisma);
+            const produto: Produto = ProdutoMap.fromPrismaModelToDomain(produtoPrisma);
             const produtoRecuperada = await produtoRepositorio.recuperarPorUuid(produto.id);
            
             expect(produtoRecuperada).toEqual(produto);
@@ -88,9 +102,12 @@ describe('Repositorio Prisma: Produto', () => {
             expect(prismaMock.produto.findUnique).toBeCalledWith({
                 where: {
                     id: produto.id
-                }    
+                } ,
+                include:produtoIncludeCategoriaPrisma
+
             }); 
         });
     });
+
 
 })
