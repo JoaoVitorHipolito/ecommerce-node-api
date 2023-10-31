@@ -33,9 +33,13 @@ class NomeCategoriaTamanhoMaximoInvalido extends CategoriaException {
   }
 }
 
+const CategoriaExceptions = {
+  CategoriaException: CategoriaException,
+  NomeCategoriaNuloOuIndefinido: NomeCategoriaNuloOuIndefinido,
+  NomeCategoriaTamanhoMinimoInvalido: NomeCategoriaTamanhoMinimoInvalido,
+  NomeCategoriaTamanhoMaximoInvalido: NomeCategoriaTamanhoMaximoInvalido
+}
+
 export {
-  CategoriaException,
-  NomeCategoriaNuloOuIndefinido,
-  NomeCategoriaTamanhoMinimoInvalido,
-  NomeCategoriaTamanhoMaximoInvalido
-};
+  CategoriaExceptions
+}

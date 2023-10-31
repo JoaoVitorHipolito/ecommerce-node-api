@@ -1,5 +1,5 @@
 import { Entity } from "@shared/domain/entity";
-import { CategoriaMap } from "@modules/catalogo/mappers/categoria.map";
+import { CategoriaMap } from "@modules/catalogo/infra/database/mappers/categoria.map";
 import { NomeCategoriaNuloOuIndefinido, NomeCategoriaTamanhoMaximoInvalido, NomeCategoriaTamanhoMinimoInvalido } from "./categoria.exception";
 import { ICategoria, RecuperarcategoriaProps, criarcategoriaProps } from "./categoria.types";
 

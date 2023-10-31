@@ -1,7 +1,7 @@
 import { faker } from "@faker-js/faker";
 import { Categoria } from "@modules/catalogo/domain/categoria/categoria.entity";
 import { Produto } from "@modules/catalogo/domain/produto/produto.entity";
-import { ProdutoMap } from "@modules/catalogo/mappers/produto.map";
+import { ProdutoMap } from "@modules/catalogo/infra/database/mappers/produto.map";
 import { PrismaClient, StatusProdutoPrisma } from "@prisma/client";
 import { afterEach } from "node:test";
 import { beforeAll, describe, expect, test, vi } from "vitest";

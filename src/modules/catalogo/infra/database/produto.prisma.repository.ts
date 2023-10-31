@@ -2,8 +2,8 @@ import { Categoria } from "@modules/catalogo/domain/categoria/categoria.entity";
 import { Produto } from "@modules/catalogo/domain/produto/produto.entity";
 import { IProdutoRepository } from "@modules/catalogo/domain/produto/produto.repository.interface";
 import { StatusProduto } from "@modules/catalogo/domain/produto/produto.types";
-import { CategoriaMap } from "@modules/catalogo/mappers/categoria.map";
-import { ProdutoMap } from "@modules/catalogo/mappers/produto.map";
+import { CategoriaMap } from "@modules/catalogo/infra/database/mappers/categoria.map";
+import { ProdutoMap } from "@modules/catalogo/infra/database/mappers/produto.map";
 import { PrismaRepository } from "@shared/infra/database/prisma.repository";
 import { produtoIncludeCategoriaPrisma } from "@shared/infra/database/prisma.types";
 
