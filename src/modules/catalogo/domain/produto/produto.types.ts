@@ -1,6 +1,6 @@
 import { type } from "os";
 import { Categoria } from "../categoria/categoria.entity";
-import { IDatasControle, KeyDatacontrole } from "@shared/datas.types";
+import { IDatasControle, KeyDatacontrole } from "@shared/domain/datas.types";
 import { ICategoria } from "../categoria/categoria.types";
 
 enum StatusProduto {

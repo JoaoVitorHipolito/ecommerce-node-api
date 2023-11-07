@@ -6,6 +6,8 @@ import { DomainException } from "@shared/domain/domain.exception";
 import { prisma } from "@main/infra/database/orm/prisma/client";
 import { categoriaRepositorio as categoriaRepo} from "@shared/infra/database";
 import { produtoRepositorio as produtoRepo} from "@shared/infra/database";
+import { recuperarCategoriaPorIdUseCase, recuperarTodasCategoriasUseCase } from "@modules/catalogo/application/use-case";
+import { RecuperarTodasCategoriasUseCase } from "@modules/catalogo/application/use-case/recuperar-todas-categorias/recuperar-todas-categorias.use-case";
 async function main(){
 
     prisma.$connect().then(
@@ -18,17 +20,13 @@ async function main(){
     //Recuperar Categoria por UUID//
     ////////////////////////////////
     
-     //const categoriaRecuperada: Categoria | null = await categoriaRepo.recuperarPorUuid("bd7c8b91-1e42-4eda-850c-cded51da61cd");
-
-     //console.log(categoriaRecuperada);
+   // console.log(await recuperarCategoriaPorIdUseCase.execute("3fe02049-0f07-44ae-87d6-99ec0897cb09"));
 
     /////////////////////////////////
     //Recuperar Todas as Categorias//
     /////////////////////////////////
-    
-   //const todasCategorias: Array<Categoria> = await categoriaRepo.recuperarTodos();
 
-   // console.log(todasCategorias);
+    console.log(await recuperarTodasCategoriasUseCase.execute());
 
     ////////////////////////////////
     //Verifica se Existe Categoria//
@@ -75,7 +73,7 @@ async function main(){
 	//Recuperar Produto por UUID//
 	////////////////////////////////
 		
-	const produtoRecuperado: Produto | null = await produtoRepo.recuperarPorUuid("c57c4a68-1766-4098-939f-f5b8c0d8eb28");
+	//const produtoRecuperado: Produto | null = await produtoRepo.recuperarPorUuid("c57c4a68-1766-4098-939f-f5b8c0d8eb28");
 
 	//console.log(produtoRecuperado);
 

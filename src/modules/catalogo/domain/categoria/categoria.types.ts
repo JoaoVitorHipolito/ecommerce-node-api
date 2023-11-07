@@ -1,4 +1,4 @@
-import { IDatasControle, KeyDatacontrole } from "@shared/datas.types";
+import { IDatasControle, KeyDatacontrole } from "@shared/domain/datas.types";
 import { type } from "os";
 
 interface ICategoria extends IDatasControle{
