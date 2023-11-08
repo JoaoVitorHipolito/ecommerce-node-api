@@ -7,10 +7,10 @@ interface ICategoria extends IDatasControle{
      
 }
 
-type criarcategoriaProps = Omit<ICategoria, "id" | KeyDatacontrole>;
+type CriarCategoriaProps = Omit<ICategoria, "id" | KeyDatacontrole>;
 
 type RecuperarcategoriaProps = ICategoria & {
     id: NonNullable<ICategoria['id']>
 }
 
-export{ICategoria,criarcategoriaProps, RecuperarcategoriaProps}
+export{ICategoria,CriarCategoriaProps, RecuperarcategoriaProps}
