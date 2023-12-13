@@ -13,7 +13,7 @@ POST http://{{host}}:{{port}}/{{apiversion}}/categorias
 Content-type: application/json
 
 {
-    "nome":"Sala de Estar"
+    "nomes":"Sala de Estar"
 }
 
 ### Atualizar Categoria
