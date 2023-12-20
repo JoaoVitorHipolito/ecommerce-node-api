@@ -1,7 +1,7 @@
 import { ProdutocomCategoriaPrisma } from "@shared/infra/database/prisma.types";
-import { Produto } from "../../../domain/produto/produto.entity";
+import { Produto } from "@modules/catalogo/domain/produto/produto.entity";
 import { IProduto, RecuperarProdutoProps, StatusProduto } from "../../../domain/produto/produto.types";
-import { Categoria } from "../../../domain/categoria/categoria.entity";
+import { Categoria } from "@modules/catalogo/domain/categoria/categoria.entity";
 import { CategoriaMap } from "./categoria.map";
 import { StatusProdutoPrisma } from "@prisma/client";
 
@@ -13,7 +13,7 @@ class ProdutoMap {
           nome: produto.nome,
           descricao: produto.descricao,
           valor: produto.valor,
-          categorias: produto.categorias,
+          categorias:  produto.categorias.map((categoria) => { return CategoriaMap.toDTO(categoria)}),
           dataCriacao: produto.dataCriacao,
           dataAtualizacao: produto.dataAtualizacao,
           dataExclusao: produto.dataExclusao,
@@ -25,36 +25,39 @@ class ProdutoMap {
         return Produto.recuperar(produto);
     }
 
-    public static fromPrismaModelToDomain(produtoPrisma: ProdutocomCategoriaPrisma): Produto{ 
+    public static fromPrismaModelToDomain(produtoPrisma: ProdutocomCategoriaPrisma): Produto {
+
+        //Define e inicializa um array de entidades de domínios categoria
         const categorias: Array<Categoria> = [];
 
+        //Transforma as categorias obtidas com o prisma em entidades de domínio categoria
         produtoPrisma.categorias.map(
-            (categoria) => {
+            (Categoria) => {
                 categorias.push(
-                    CategoriaMap.fromPrismaModelToDomain(categoria.categoria)
+                    CategoriaMap.fromPrismaModelToDomain(Categoria.categoria)
                 )
             }
-        )
+        );
 
-        return this.toDomain(
-            {
-                id: produtoPrisma.id,
-                nome: produtoPrisma.nome,
-                descricao: produtoPrisma.descricao,
-                valor: produtoPrisma.valor,
-                categorias: categorias,
-                dataCriacao: produtoPrisma.dataCriacao,
-                dataAtualizacao: produtoPrisma.dataAtualizacao,
-                dataExclusao: produtoPrisma.dataExclusao,
-                status: StatusProduto[produtoPrisma.status]
-            }
-        )
+        //Retorna um produto como uma entidade de domínio
+        return this.toDomain({
+            id: produtoPrisma.id,
+            nome: produtoPrisma.nome,
+            descricao: produtoPrisma.descricao,
+            valor: produtoPrisma.valor,
+            categorias: categorias,
+            dataCriacao: produtoPrisma.dataCriacao,
+            dataAtualizacao: produtoPrisma.dataAtualizacao,
+            dataExclusao: produtoPrisma.dataExclusao,
+            status: StatusProduto[produtoPrisma.status]
+        });
+
     }
 
     public static toStatusProdutoPrisma(status: StatusProduto): StatusProdutoPrisma{
         return StatusProdutoPrisma[status.toString() as keyof typeof StatusProdutoPrisma];
     }
-    
+
 
 }
 
