@@ -50,3 +50,26 @@ enum StatusProdutoPrisma {
   ATIVO
   DESATIVO
 }
+
+/////////////
+//usuario///
+////////////
+
+model Usuario {
+  id                String   @id @db.Uuid
+  nome              String   @db.VarChar(50)
+  email             String   @unique
+  senha             String
+  tipo              TipoUsuarioPrisma @map("tipo_usuario")
+  dataCriacao       DateTime @default(now()) @map("data_criacao")
+  dataAtualizacao   DateTime @updatedAt @map("data_atualizacao")
+
+  @@map("usuarios")
+}
+
+enum TipoUsuarioPrisma {
+  CLIENTE
+  ADMINISTRADOR
+}
+
+
