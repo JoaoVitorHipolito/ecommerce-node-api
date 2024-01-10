@@ -11,6 +11,7 @@ GET http://{{host}}:{{port}}/{{apiversion}}/categorias
 ### Inserir Uma Categoria
 POST http://{{host}}:{{port}}/{{apiversion}}/categorias
 Content-type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRjODgwMmQzLWViYTAtNDVlZi1hMGVjLWMzNjdlMzMwYjJjYiIsIm5vbWUiOiJTci5IaXBvbGl0byIsImVtYWlsIjoiU3IuSGlwb2xpdG9AbWFpbC5jb20iLCJ0aXBvIjoiQURNSU5JU1RSQURPUiIsImlhdCI6MTcwNDg0NTg2NSwiZXhwIjoxNzA0ODQ5NDY1fQ.JGhrhhiFN8xlCIQjsHIsNsrFV2JRF8frBsH592cftVg
 
 {
     "nome":"cama"
